@@ -13,8 +13,8 @@
 int main(int argc, char* argv[]) {
 	//Print basic information about the program
 	std::cout << "CS 433 Programming assignment 1" << std::endl;
-	std::cout << "Author: xxxxxx and xxxxxxx" << std::endl;
-	std::cout << "Date: xx/xx/20xx" << std::endl;
+	std::cout << "Author: Christian Contreras, Micah Johnson and Eric Tyler" << std::endl;
+	std::cout << "Date: 02/15/2021" << std::endl;
 	std::cout << "Course: CS433 (Operating Systems)" << std::endl;
 	std::cout << "Description : Program to implement a priority ready queue of processes" << std::endl;
 	std::cout << "=================================" << std::endl;
