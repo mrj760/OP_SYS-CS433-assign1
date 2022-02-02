@@ -1,26 +1,17 @@
-#include <iostream>
-#include "ReadyQueue.h"
-
-// TODO: Add your implementation of ReadyQueue functions here
+#include "pqueue.h"
 
 // constructor
-ReadyQueue::ReadyQueue()
+pqueue::pqueue()
 {
 	count = 0; // no jobs yet
 }
 
 // destructor
-ReadyQueue::~ReadyQueue() 
-{
-    for (int i = 0; i < MAX; i++)
-    {
-        delete Q[i];
-    }
-}
+pqueue::~pqueue() {}
 
-// Purpose: to add a job to a right place in the ReadyQueue
+// Purpose: to add a job to a right place in the Pqueue
 // Arguments: 
-void ReadyQueue::addPCB(PCB* p)
+void pqueue::insertjob(PCB* p)
 {
 	cout << "Adding: " << *p << endl;
 	if (count >= MAX)
@@ -30,39 +21,41 @@ void ReadyQueue::addPCB(PCB* p)
 	}
 	//  add the job j at the rear (and update count)
 	//    if impossible else display error message.
-	Q[count++] = p;
+	Q[count++] = *p;
 	trickleup(); // moves the job to the right place
 }
 
-// Purpose: to print a job and reheapify the ReadyQueue
-void ReadyQueue::printjob()
+// Purpose: to print a job and reheapify the Pqueue
+void pqueue::printjob()
 {
-	cout << "Printing: " << *Q[0] << endl;
+	cout << "Printing: " << Q[0] << endl;
 	reheapify();
 }
 
 // Purpose: to display all jobs
-void ReadyQueue::display()
+void pqueue::displayAll()
 {
 	cout << "Jobs: ";
 	// loop to display jobs from slot 0 to slot count-1 horizontally.
 	//  No need to show a tree format.
 	int i = 0;
 	while (i < count)
-		cout << *Q[i++] << " ";
+		cout << Q[i++] << " ";
 	cout << endl;
 }
 
+// Utility functions follow: ------------------
+
 //  swap values in locations loc1 and loc2
-void ReadyQueue::swap(const int& loc1, const int& loc2)
+void pqueue::swap(const int& loc1, const int& loc2)
 {
-	PCB* temp = Q[loc1];
+	PCB temp = Q[loc1];
 	Q[loc1] = Q[loc2];
 	Q[loc2] = temp;
 }
 
 // Purpose: to make the very last job trickle up to the right location.
-void ReadyQueue::trickleup()
+void pqueue::trickleup()
 {
 	int x = count - 1; // the very last job's location
 	//  While x is > 0
@@ -86,19 +79,19 @@ void ReadyQueue::trickleup()
 
 // Purpose: find the location of the parent
 // The child location is given.  Need to call even.
-int ReadyQueue::getParent(const int& childloc)
+int pqueue::getParent(const int& childloc)
 {
 	return even(childloc) ? (childloc - 2) / 2 : (childloc - 1) / 2; //  return the parent location based on the child loc
 }
 
 // even/odd important for finding parent location
-bool ReadyQueue::even(const int& i)
+bool pqueue::even(const int& i)
 {
 	return i % 2 == 0;
 }
 
-// Purpose: to reheapify the ReadyQueue by trickling down
-void ReadyQueue::reheapify()
+// Purpose: to reheapify the Pqueue by trickling down
+void pqueue::reheapify()
 {
 	
 	Q[0] = Q[count - 1]; // move the last job to the front
@@ -125,7 +118,7 @@ void ReadyQueue::reheapify()
 
 // Purpose: to find the location of the smaller child
 // where children are at locations 2*i+1 and 2*i+2
-int ReadyQueue::getSmallerchild(const int& i)
+int pqueue::getSmallerchild(const int& i)
 {
 	int LC = 2 * i + 1,
         RC = 2 * i + 2; // locations of children (LC: Left child, RC: Right child)

@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+using namespace std;
 
 // Remember to add comments to your code
 // ...
@@ -22,6 +24,14 @@ public:
 	// A process in the ReadyQueue should be in READY state
 	ProcState state;
 
+	PCB();
+	PCB(const int);
+	PCB(const int, unsigned const int);
+	PCB(const int, unsigned const int, const ProcState);
+
 	// TODO: Add constructor and other necessary functions for the PCB class
+	bool operator>(const PCB& other);
+	bool operator<(const PCB& other);
+	friend ostream& operator<<(ostream& os, const PCB& p);
 };
 

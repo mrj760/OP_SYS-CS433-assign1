@@ -22,7 +22,13 @@ int main(int argc, char* argv[]) {
 	// TODO: Add your code for Test 1
 	std::cout << "Performing Test 1" << std::endl;
 	//TODO: add processes 14, 1, 28, 39 and 18 to q1. Display the content of q1
-	
+	ReadyQueue q1;
+	q1.addPCB(new PCB(14));
+	q1.addPCB(new PCB(1));
+	q1.addPCB(new PCB(28));
+	q1.addPCB(new PCB(39));
+	q1.addPCB(new PCB(18));
+	q1.display();
 	//TODO: remove one process with the highest priority from q1 and display q1.
 	
 	//TODO: add additional processes 48, 10, 31 and 19 into q1, and display q1.
