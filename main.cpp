@@ -66,4 +66,6 @@ int main(int argc, char* argv[]) {
 	time = clock() - time;
 	printf("Test 2 run time = %f seconds\n", time);
 	#endif
+
+	return 0;
 }
