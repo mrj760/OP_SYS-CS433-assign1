@@ -6,7 +6,8 @@
 #include <sys/time.h>
 #endif
 #ifdef _WIN32
-#include <time.h>
+// #include <time.h>
+#include <chrono>
 #endif
 #include "ReadyQueue.h"
 
@@ -42,15 +43,18 @@ int main(int argc, char* argv[]) {
 
 	// TODO: Add your code for Test 2
 	std::cout << "Performing Test 2" << std::endl;
+	//start timer 
+	
+	#ifdef _WIN32
+	auto start = std::chrono::high_resolution_clock::now();
+	#endif
+
+	#ifdef __linux__
 	struct timespec start, end;
-        //start timer 
-		#ifdef __linux__
-        clock_gettime(CLOCK_MONOTONIC, &start);
-		#endif
-		#ifdef _WIN32
-		clock_t time = clock();
-		#endif
-        for (int i = 0; i < 1000000; i++) {
+	clock_gettime(CLOCK_MONOTONIC, &start);
+    #endif
+
+    for (int i = 0; i < 1000000; i++) {
        		//TODO: add or remove a process with equal probabilty
 	}
 
@@ -63,8 +67,9 @@ int main(int argc, char* argv[]) {
 	#endif
 
 	#ifdef _WIN32
-	time = clock() - time;
-	printf("Test 2 run time = %f seconds\n", time);
+	auto end  = std::chrono::high_resolution_clock::now();
+	auto elapsed = end - start;
+	printf("Test 2 run time = %f seconds\n", elapsed);
 	#endif
 
 	return 0;

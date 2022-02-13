@@ -16,22 +16,18 @@ It may also have other attributes, such as scheduling information (e.g. priority
 */
 class PCB {
 public:
-    // The unique process ID
-	unsigned int id;
-    // The priority of a process valued between 1-50. Larger number represents higher priority
-	unsigned int priority;
-	// The current state of the process.
-	// A process in the ReadyQueue should be in READY state
-	ProcState state;
+	unsigned int id; // The unique process ID
+	unsigned int priority; // The priority of a process valued between 1-50. Larger number represents higher priority
+	ProcState state; // The current state of the process. (A process in the ReadyQueue should be in READY state)
 
-	PCB();
-	PCB(const int);
-	PCB(const int, unsigned const int);
-	PCB(const int, unsigned const int, const ProcState);
+	PCB(const int); // Constructor takes only ID. Priority is default (same as ID). State is default (ready)
+	PCB(const int, unsigned const int); // Constructor takes ID and priority. State is default (ready)
+	PCB(const int, const ProcState); // Constructor takes ID and state. Priority is default (same as ID)
+	PCB(const int, unsigned const int, const ProcState); // Constructor taking ID, priority, and state
 
-	// TODO: Add constructor and other necessary functions for the PCB class
-	bool operator>(const PCB& other);
-	bool operator<(const PCB& other);
-	friend ostream& operator<<(ostream& os, const PCB& p);
+	bool operator>(const PCB& other); // returns true if the priority of the first process is greater than that of the second process
+	bool operator<(const PCB& other); // returns true if the priority of the first process is less than that of the second process
+	bool operator==(const PCB& other); // returns true if the priority of the first process equals that of the second process
+	friend ostream& operator<<(ostream& os, const PCB& p); // Sends a text summary of the process to an ostream
 };
 
