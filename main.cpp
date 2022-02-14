@@ -2,12 +2,15 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <ctime>
 #ifdef __linux__
 #include <sys/time.h>
 #endif
 #ifdef _WIN32
 // #include <time.h>
 #include <chrono>
+using clock_type = std::chrono::steady_clock;
+using second_clock_type = std::chrono::duration<double, std::ratio<1>>;
 #endif
 #include "ReadyQueue.h"
 
@@ -60,7 +63,7 @@ int main(int argc, char* argv[]) {
 	//start timer 
 	
 	#ifdef _WIN32
-	auto start = std::chrono::high_resolution_clock::now();
+	chrono::time_point<clock_type> start{clock_type::now()};
 	#endif
 
 	#ifdef __linux__
@@ -69,9 +72,22 @@ int main(int argc, char* argv[]) {
     #endif
 
 	ReadyQueue q2;
+	srand(static_cast<unsigned int>(time(nullptr)));
+	rand();
+	
     for (int i = 0; i < 1000000; i++) {
        	//TODO: add or remove a process with equal probabilty
-		
+		if (rand() % 2)
+		{
+			int p = (rand() % 49) + 1;
+			q2.addPCB(new PCB(i, p));
+			if (p < 1 || p > 50)
+				cout << "lmk" << endl;
+		}
+		else
+		{
+			q2.removePCB();
+		}
 	}
 
 	// end timer
@@ -83,9 +99,8 @@ int main(int argc, char* argv[]) {
 	#endif
 
 	#ifdef _WIN32
-	auto end  = std::chrono::high_resolution_clock::now();
-	auto elapsed = end - start;
-	printf("Test 2 run time = %f seconds\n", elapsed);
+	double elapsed  = std::chrono::duration_cast<second_clock_type>(clock_type::now() - start).count();
+	cout << "Test 2 run time = " << elapsed << "seconds" << endl;
 	#endif
 
 	return 0;

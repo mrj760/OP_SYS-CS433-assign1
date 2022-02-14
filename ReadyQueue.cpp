@@ -22,10 +22,10 @@ ReadyQueue::~ReadyQueue()
 // Arguments: 
 void ReadyQueue::addPCB(PCB* p)
 {
-	cout << "Adding: " << *p << endl;
+	// cout << "Adding: " << *p << endl;
 	if (count >= MAX)
 	{
-		cout << "...cannot add.. full." << endl;
+		// cout << "...cannot add.. full." << endl;
 		return;
 	}
 	//  add the job j at the rear (and update count)
@@ -43,10 +43,15 @@ int ReadyQueue::size()
 // Purpose: to print a job and reheapify the ReadyQueue
 PCB* ReadyQueue::removePCB()
 {
+	if (count < 1)
+	{
+		// cout << "ReadyQueue is empty. No PCB to remove." << endl;
+		return nullptr;
+	}
 	PCB* ret = Q[0];
 	ret->state = ProcState::RUNNING;
 	reheapify();
-	cout << "Removed: " << *ret << endl;
+	// cout << "Removed: " << *ret << endl;
 	return ret;
 }
 
