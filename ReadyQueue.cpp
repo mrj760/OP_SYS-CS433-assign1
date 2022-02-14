@@ -30,26 +30,35 @@ void ReadyQueue::addPCB(PCB* p)
 	}
 	//  add the job j at the rear (and update count)
 	//    if impossible else display error message.
+	p->state = ProcState::READY;
 	Q[count++] = p;
 	trickleup(); // moves the job to the right place
 }
 
-// Purpose: to print a job and reheapify the ReadyQueue
-void ReadyQueue::printjob()
+int ReadyQueue::size()
 {
-	cout << "Printing: " << *Q[0] << endl;
+	return count;
+}
+
+// Purpose: to print a job and reheapify the ReadyQueue
+PCB* ReadyQueue::removePCB()
+{
+	PCB* ret = Q[0];
+	ret->state = ProcState::RUNNING;
 	reheapify();
+	cout << "Removed: " << *ret << endl;
+	return ret;
 }
 
 // Purpose: to display all jobs
 void ReadyQueue::display()
 {
-	cout << "Jobs: ";
+	cout << "Jobs:" << count << "\n\t";
 	// loop to display jobs from slot 0 to slot count-1 horizontally.
 	//  No need to show a tree format.
 	int i = 0;
 	while (i < count)
-		cout << *Q[i++] << " ";
+		cout << *Q[i++] << "\n\t";
 	cout << endl;
 }
 
@@ -61,20 +70,19 @@ void ReadyQueue::swap(const int& loc1, const int& loc2)
 	Q[loc2] = temp;
 }
 
-// Purpose: to make the very last job trickle up to the right location.
+// Purpose: to make very last job trickle up to right location.
 void ReadyQueue::trickleup()
 {
-	int x = count - 1; // the very last job's location
-	//  While x is > 0
-	//    compare Q[x] with the parent value (*)
-	//    and if the parent value is bigger call swap & update x
-	//    to be the parent location. Otherwise stop the loop.
-	// (*) Call getParent to get the location of the parent
-	//            based on the child's location.
+	int x = count - 1; // very last job's location
+	//  While x is > 0 :
+	//  	compare Q[x] with parent value.
+	//	    if parent value is bigger, call swap & update x to be parent location. 
+	//		Otherwise stop loop.
+	//    	Call getParent to get location of parent based on child's location.
 	while (x > 0)
 	{
 		int p = getParent(x);
-		if (Q[x] < Q[p])
+		if (*Q[x] < *Q[p])
 		{
 			swap(x, p);
 			x = p;
@@ -84,20 +92,19 @@ void ReadyQueue::trickleup()
 	}
 }
 
-// Purpose: find the location of the parent
-// The child location is given.  Need to call even.
+// Find location of parent based on child location
 int ReadyQueue::getParent(const int& childloc)
 {
-	return even(childloc) ? (childloc - 2) / 2 : (childloc - 1) / 2; //  return the parent location based on the child loc
+	return even(childloc) ? (childloc - 2) / 2 : (childloc - 1) / 2;
 }
 
-// even/odd important for finding parent location
+// even/odd important for getParent location
 bool ReadyQueue::even(const int& i)
 {
 	return i % 2 == 0;
 }
 
-// Purpose: to reheapify the ReadyQueue by trickling down
+// Reheapify ReadyQueue by trickling down
 void ReadyQueue::reheapify()
 {
 	
@@ -105,26 +112,26 @@ void ReadyQueue::reheapify()
 	count--;
 
 	/*  Start X at 0 (the root)
-	 	While X is within the array (the used portion):
-	    	Find the location of the smaller child by calling getSmallerchild.
-	    	(if the location of both children are off the tree, stop the loop).
-	    	If the smaller child is smaller than the parent value,
-			call swap and X becomes the smaller child's location.
-	    	else no swaps so stop to loop. */
+	 	While X is within array (the used portion):
+	    	Find location of smaller child by calling getSmallerchild.
+	    	(if location of both children are off-tree, stop loop).
+	    	If smaller child is smaller than parent value,
+			call swap and X becomes smaller child's location.
+	    	else no swaps so stop loop. */
 
-    int x = 0;			 // the current location
+    int x = 0;			 // current location
 	while (x < (count - 1))
 	{
 		int sc = getSmallerchild(x); // sc: "smaller child"
-		if (sc == -1 || Q[x] < Q[sc])
-			return; // both children off tree, or parent is smaller than smallest child
+		if (sc == -1 || *Q[x] < *Q[sc])
+			return; // both children off-tree, or parent is smaller than smallest child
 		swap(x, sc);
 		x = sc;
 	}
 }
 
-// Purpose: to find the location of the smaller child
-// where children are at locations 2*i+1 and 2*i+2
+// Find location of smaller child
+// Children are at locations 2*i+1 and 2*i+2
 int ReadyQueue::getSmallerchild(const int& i)
 {
 	int LC = 2 * i + 1,
@@ -138,6 +145,5 @@ int ReadyQueue::getSmallerchild(const int& i)
 		return LC; // LC is within bounds but RC is not.
 	}
 
-	return Q[LC] < Q[RC] ? LC : RC; // return the location of the smaller child
+	return *Q[LC] < *Q[RC] ? LC : RC; // return location of smaller child
 }
-// NEVER GO TO UNUSED PART OF THE ARRAY

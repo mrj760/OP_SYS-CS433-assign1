@@ -31,15 +31,29 @@ int main(int argc, char* argv[]) {
 	q1.addPCB(new PCB(18));
 	q1.display();
 	//TODO: remove one process with the highest priority from q1 and display q1.
-	
+	q1.removePCB();
+	q1.display();
 	//TODO: add additional processes 48, 10, 31 and 19 into q1, and display q1.
-	
+	q1.addPCB(new PCB(48));
+	q1.addPCB(new PCB(10));
+	q1.addPCB(new PCB(31));
+	q1.addPCB(new PCB(19));
+	q1.display();
 	//TODO: remove one process with the highest priority from q1 and display q1.
-	
+	q1.removePCB();
+	q1.display();
 	//TODO: add additional processes 29, 41, 18 and 46 to q1 and display q1.
-	
+	q1.addPCB(new PCB(10));
+	q1.addPCB(new PCB(10));
+	q1.addPCB(new PCB(10));
+	q1.addPCB(new PCB(46));
+	q1.display();
 	//TODO: One by one remove the process with the highest priority from the queue q1 and display the queue after each removal.
-
+	while (q1.size() > 0)
+	{
+		q1.removePCB();
+		q1.display();
+	}
 
 	// TODO: Add your code for Test 2
 	std::cout << "Performing Test 2" << std::endl;
@@ -54,8 +68,10 @@ int main(int argc, char* argv[]) {
 	clock_gettime(CLOCK_MONOTONIC, &start);
     #endif
 
+	ReadyQueue q2;
     for (int i = 0; i < 1000000; i++) {
-       		//TODO: add or remove a process with equal probabilty
+       	//TODO: add or remove a process with equal probabilty
+		
 	}
 
 	// end timer

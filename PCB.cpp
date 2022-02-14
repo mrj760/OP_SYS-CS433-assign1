@@ -1,19 +1,19 @@
 #include "PCB.h"
 
-// Constructor takes only ID. Priority is default (same as ID). State is default (ready)
+// Constructor takes only ID. Priority is default (same as ID). State is default (new)
 PCB::PCB(const int id)
 {
     this->id = id;
     this->priority = id;
-    this->state = ProcState::READY;
+    this->state = ProcState::NEW;
 }
 
-// Constructor takes ID and priority. State is default (ready)
+// Constructor takes ID and priority. State is default (new)
 PCB::PCB(const int id, unsigned const int priority)
 {
     this->id = id;
     this->priority = priority;
-    this->state = ProcState::READY;
+    this->state = ProcState::NEW;
 }
 
 // Constructor takes ID and state. Priority is default (same as ID)
@@ -38,7 +38,7 @@ bool PCB::operator>(const PCB& other)
 	return priority > other.priority;
 }
 
-// returns true if the priority of the first process is less than that of the second process
+// returns true if the priority of the first process is lower than that of the second process
 bool PCB::operator<(const PCB& other)
 {
 	return priority < other.priority;

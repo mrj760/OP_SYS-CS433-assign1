@@ -26,22 +26,19 @@ public:
 
 	void display();	 // display all jobs
 
-	// print the first job and reheapify
-	void printjob();
-
 	// Returns the number of elements in the queue.
 	int size();
 
+	// move the last job to the front and trickle down (removes lowest priority job)
+	void reheapify(); 
+
 private:
-	const static int MAX = 50;
+	const static int MAX = 5000;
 	int count;
 	PCB* Q[MAX]; // array holding jobs
 
 	// Prints the queue contents to standard output.
 	void swap(const int&, const int&);
-
-	// move the last job to the front and trickle down
-	void reheapify(); 
 
 	// return location of the smaller child - compares L and R children of the given location
 	int getSmallerchild(const int&); 
