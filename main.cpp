@@ -108,7 +108,7 @@ int main(int argc, char* argv[]) {
 	cout << "Test 2 run time = " << elapsed << "seconds" << endl;
 	#endif
 
-	q2.display();
+	// q2.display();
 
 	return 0;
 }

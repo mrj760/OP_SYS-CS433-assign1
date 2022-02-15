@@ -34,14 +34,14 @@ public:
 	const static int MAX = 49; // jobs hashed by priority, which can only be up to 50
 
 private:
-	struct Node
+	struct Node // contains a job and a pointer to the next job of the same priority
 	{
 		PCB* process;
 		Node* next;
 
 		Node(PCB*);
 	};
-	class List
+	class List // contains jobs of the same priority
 	{
 		private:
 		Node* first = nullptr;

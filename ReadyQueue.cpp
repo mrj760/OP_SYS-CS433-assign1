@@ -1,11 +1,13 @@
 #include "ReadyQueue.h"
 
+// Creates a node with a job that doesn't point to anything yet
 ReadyQueue::Node::Node(PCB* proc)
 {
     process = proc;
     next = nullptr;
 }
 
+// adds a node with the given job at the end of the list of a certain priority
 void ReadyQueue::List::addRear(PCB* proc)
 {
     if (listcount > 1) // elements already exist in the list
@@ -27,6 +29,7 @@ void ReadyQueue::List::addRear(PCB* proc)
     }
 }
 
+// remove the first job in the list
 PCB* ReadyQueue::List::removeFront()
 {
     if (listcount < 1)
@@ -46,6 +49,7 @@ ReadyQueue::ReadyQueue()
 
 }
 
+// iterate through all nodes in non-empty lists and delete
 ReadyQueue::~ReadyQueue()
 {
     for (int i = 0; i < MAX; ++i)
@@ -63,6 +67,7 @@ ReadyQueue::~ReadyQueue()
     }
 }
 
+// add a process to the queue by finding the right priority list to add it to
 void ReadyQueue::addPCB(PCB* proc)
 {
     if (proc->priority > MAX || proc->priority < 1)
@@ -77,6 +82,7 @@ void ReadyQueue::addPCB(PCB* proc)
     ++count;
 }
 
+// remove the highest priority job
 PCB* ReadyQueue::removePCB()
 {
     if (count < 1)
@@ -95,6 +101,7 @@ PCB* ReadyQueue::removePCB()
     return nullptr; // doesn't do anything, just here for compiler sanity
 }
 
+// display all jobs sorted/grouped by their priorities
 void ReadyQueue::display()
 {
     if (count < 1)
@@ -125,6 +132,7 @@ void ReadyQueue::display()
     cout << "~~~~~~~~~~~\nEND ReadyQueue Summary.\n~~~~~~~~~~~\n";
 }
 
+// return the number of jobs in the queue
 int ReadyQueue::size()
 {
     return count;

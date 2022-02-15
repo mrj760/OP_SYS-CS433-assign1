@@ -3,7 +3,7 @@
 # 
 ###################################
 CC = g++			# use g++ for compiling c++ code or gcc for c code
-CFLAGS = -g -Wall -std=c++11	# compilation flags: -g for debugging. Change to -O2 or -O3 for optimized code.
+CFLAGS = -O2 -Wall -std=c++11	# compilation flags: -g for debugging. Change to -O2 or -O3 for optimized code.
 LIB = -lm			# linked libraries	
 LDFLAGS = -L.			# link flags
 PROG = prog1			# target executable (output)
