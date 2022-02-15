@@ -5,21 +5,19 @@
 
 #include "PCB.h"
 
-/* List of processes with a certain priority. Only ever need to add to the rear or delete from the front */
-
-
 /**
  * ReadyQueue is a queue of PCB's that are in the READY state to be scheduled to run.
  * It should be a priority queue here uch that the process with the highest priority
  * can be selected next.
  */
-class ReadyQueue {
+class ReadyQueueHeap {
 public:
 	// TODO: Implement the required functions. Add necessary member fields and functions
 	// You may use different parameter signatures from the example below
 	// add a PCB representing a process into the ready queue.
-	ReadyQueue();
-	~ReadyQueue();
+
+	ReadyQueueHeap();
+	~ReadyQueueHeap();
 
 	void addPCB(PCB*);
 
@@ -30,29 +28,28 @@ public:
 
 	// Returns the number of elements in the queue.
 	int size();
-	
-	const static int MAX = 49; // jobs hashed by priority, which can only be up to 50
+
+	// move the last job to the front and trickle down (removes lowest priority job)
+	void reheapify(); 
 
 private:
-	struct Node
-	{
-		PCB* process;
-		Node* next;
-
-		Node(PCB*);
-	};
-	class List
-	{
-		private:
-		Node* first = nullptr;
-		Node* last = nullptr;
-		unsigned int listcount = 0;
-
-		void addRear(PCB*);
-		PCB* removeFront();
-
-		friend ReadyQueue;
-	};
+	const static int MAX = 49; // jobs hashed by priority, which can only be up to 50
 	int count = 0;
-	List Q[MAX]; // array holding lists of jobs
+	PCB* Q[MAX]; // array holding lists of jobs
+
+	// Prints the queue contents to standard output.
+	void swap(const int&, const int&);
+
+	// return location of the smaller child - compares L and R children of the given location
+	int getSmallerchild(const int&); 
+
+	// trickling up after adding at the rear
+	void trickleup();		  
+
+	// return the parent location given the child loc
+	int getParent(const int&);	
+
+	// is the number even?  Needed to find the parent	  
+	bool even(const int&);
+	  
 };

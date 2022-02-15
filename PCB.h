@@ -28,6 +28,6 @@ public:
 	bool operator>(const PCB& other); // returns true if the priority of the first process is greater than that of the second process
 	bool operator<(const PCB& other); // returns true if the priority of the first process is less than that of the second process
 	bool operator==(const PCB& other); // returns true if the priority of the first process equals that of the second process
-	friend ostream& operator<<(ostream& os, const PCB& p); // Sends a text summary of the process to an ostream
+	friend ostream& operator<<(ostream& os, const PCB* p); // Sends a text summary of the process to an ostream
 };
 

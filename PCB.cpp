@@ -32,29 +32,11 @@ PCB::PCB(const int id, unsigned const int priority, const ProcState state)
     this->state = state;
 }
 
-// returns true if the priority of the first process is greater than that of the second process
-bool PCB::operator>(const PCB& other)
-{
-	return priority > other.priority;
-}
-
-// returns true if the priority of the first process is lower than that of the second process
-bool PCB::operator<(const PCB& other)
-{
-	return priority < other.priority;
-}
-
-// returns true if the priority of the first process equals that of the second process
-bool PCB::operator==(const PCB& other)
-{
-	return priority == other.priority;
-}
-
 // Sends a text summary of the process to an ostream
-ostream& operator<<(ostream& os, const PCB& p)
+ostream& operator<<(ostream& os, const PCB* p)
 {
-		os << "ID: " << p.id << ", Priority: " << p.priority << ", State: ";
-		switch (p.state)
+		os << "ID: " << p->id << ", Priority: " << p->priority << ", State: ";
+		switch (p->state)
 		{
 			case(ProcState::NEW):
 				os << "NEW";

@@ -27,6 +27,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "Performing Test 1" << std::endl;
 	//TODO: add processes 14, 1, 28, 39 and 18 to q1. Display the content of q1
 	ReadyQueue q1;
+	cout << "Adding: 14, 1, 28, 39, 18." << endl;
 	q1.addPCB(new PCB(14));
 	q1.addPCB(new PCB(1));
 	q1.addPCB(new PCB(28));
@@ -34,32 +35,37 @@ int main(int argc, char* argv[]) {
 	q1.addPCB(new PCB(18));
 	q1.display();
 	//TODO: remove one process with the highest priority from q1 and display q1.
+	cout << "Removing First" << endl;
 	q1.removePCB();
 	q1.display();
 	//TODO: add additional processes 48, 10, 31 and 19 into q1, and display q1.
+	cout << "Adding: 48, 10, 31, 19." << endl;
 	q1.addPCB(new PCB(48));
 	q1.addPCB(new PCB(10));
 	q1.addPCB(new PCB(31));
 	q1.addPCB(new PCB(19));
 	q1.display();
 	//TODO: remove one process with the highest priority from q1 and display q1.
+	cout << "Removing First" << endl;
 	q1.removePCB();
 	q1.display();
 	//TODO: add additional processes 29, 41, 18 and 46 to q1 and display q1.
-	q1.addPCB(new PCB(10));
-	q1.addPCB(new PCB(10));
-	q1.addPCB(new PCB(10));
+	cout << "Adding: 29, 41, 18, 46." << endl;
+	q1.addPCB(new PCB(29));
+	q1.addPCB(new PCB(41));
+	q1.addPCB(new PCB(18));
 	q1.addPCB(new PCB(46));
 	q1.display();
 	//TODO: One by one remove the process with the highest priority from the queue q1 and display the queue after each removal.
 	while (q1.size() > 0)
 	{
+		cout << "Emptying." << endl;
 		q1.removePCB();
 		q1.display();
 	}
 
 	// TODO: Add your code for Test 2
-	std::cout << "Performing Test 2" << std::endl;
+	std::cout << "\n\nPerforming Test 2" << std::endl;
 	//start timer 
 	
 	#ifdef _WIN32
@@ -79,10 +85,9 @@ int main(int argc, char* argv[]) {
        	//TODO: add or remove a process with equal probabilty
 		if (rand() % 2)
 		{
-			int p = (rand() % 49) + 1;
+			int p = (rand() % ReadyQueue::MAX)+1;
+			// cout << p << endl;
 			q2.addPCB(new PCB(i, p));
-			if (p < 1 || p > 50)
-				cout << "lmk" << endl;
 		}
 		else
 		{
@@ -102,6 +107,8 @@ int main(int argc, char* argv[]) {
 	double elapsed  = std::chrono::duration_cast<second_clock_type>(clock_type::now() - start).count();
 	cout << "Test 2 run time = " << elapsed << "seconds" << endl;
 	#endif
+
+	q2.display();
 
 	return 0;
 }
