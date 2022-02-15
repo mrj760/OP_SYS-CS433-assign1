@@ -16,25 +16,23 @@ void ReadyQueue::List::addRear(PCB* proc)
         last = last->next;
         ++listcount;
     }
-    else if (listcount == 1) // only first element exists in list
+    else if (listcount < 1) // adding first element to the list
+    {
+        first = new Node(proc);
+        listcount = 1;
+        
+    }
+    else // only first element exists in list
     {
         last = new Node(proc);
         first->next = last;
         listcount = 2;
-    }
-    else // adding first element to the list
-    {
-        first = new Node(proc);
-        listcount = 1;
     }
 }
 
 // remove the first job in the list
 PCB* ReadyQueue::List::removeFront()
 {
-    if (listcount < 1)
-        return nullptr;
-
     PCB* ret = first->process;
     Node* del = first;
     first = first->next;
@@ -70,11 +68,6 @@ ReadyQueue::~ReadyQueue()
 // add a process to the queue by finding the right priority list to add it to
 void ReadyQueue::addPCB(PCB* proc)
 {
-    if (proc->priority > MAX || proc->priority < 1)
-    {
-        cout << "Priority invalid. Cannot add process with priority (" << proc->priority << ")" << endl;
-        return;
-    }
     // cout << "Adding: {" << proc << "}" << endl;
     proc->state = ProcState::READY;
     int slot = proc->priority-1;

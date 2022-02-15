@@ -66,20 +66,20 @@ int main(int argc, char* argv[]) {
 
 	// TODO: Add your code for Test 2
 	std::cout << "\n\nPerforming Test 2" << std::endl;
-	//start timer 
 	
+	srand(static_cast<unsigned int>(time(nullptr)));
+	rand();
+
+	//start timer 
 	#ifdef _WIN32
 	chrono::time_point<clock_type> start{clock_type::now()};
 	#endif
-
 	#ifdef __linux__
 	struct timespec start, end;
 	clock_gettime(CLOCK_MONOTONIC, &start);
     #endif
 
 	ReadyQueue q2;
-	srand(static_cast<unsigned int>(time(nullptr)));
-	rand();
 	
     for (int i = 0; i < 1000000; i++) {
        	//TODO: add or remove a process with equal probabilty

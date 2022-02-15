@@ -7,7 +7,7 @@
             "command": "g++",
             "args": [
                 "-std=gnu++11",
-                "-g",
+                "-O3",
                 "-o",
                 "main.exe",
                 "main.cpp",
