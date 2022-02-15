@@ -51,5 +51,4 @@ private:
 
 	// is the number even?  Needed to find the parent	  
 	bool even(const int&);
-	  
 };

@@ -29,9 +29,13 @@ int main(int argc, char* argv[]) {
 	ReadyQueue q1;
 	cout << "Adding: 14, 1, 28, 39, 18." << endl;
 	q1.addPCB(new PCB(14));
+	// q1.display();
 	q1.addPCB(new PCB(1));
+	// q1.display();
 	q1.addPCB(new PCB(28));
+	// q1.display();
 	q1.addPCB(new PCB(39));
+	// q1.display();
 	q1.addPCB(new PCB(18));
 	q1.display();
 	//TODO: remove one process with the highest priority from q1 and display q1.
@@ -51,10 +55,12 @@ int main(int argc, char* argv[]) {
 	q1.display();
 	//TODO: add additional processes 29, 41, 18 and 46 to q1 and display q1.
 	cout << "Adding: 29, 41, 18, 46." << endl;
+	q1.addPCB(new PCB(14));
 	q1.addPCB(new PCB(29));
 	q1.addPCB(new PCB(41));
 	q1.addPCB(new PCB(18));
 	q1.addPCB(new PCB(46));
+	q1.addPCB(new PCB(48));
 	q1.display();
 	//TODO: One by one remove the process with the highest priority from the queue q1 and display the queue after each removal.
 	while (q1.size() > 0)
@@ -66,10 +72,6 @@ int main(int argc, char* argv[]) {
 
 	// TODO: Add your code for Test 2
 	std::cout << "\n\nPerforming Test 2" << std::endl;
-	
-	srand(static_cast<unsigned int>(time(nullptr)));
-	rand();
-
 	//start timer 
 	#ifdef _WIN32
 	chrono::time_point<clock_type> start{clock_type::now()};
@@ -78,7 +80,9 @@ int main(int argc, char* argv[]) {
 	struct timespec start, end;
 	clock_gettime(CLOCK_MONOTONIC, &start);
     #endif
-
+	
+	srand(static_cast<unsigned int>(time(nullptr)));
+	rand();
 	ReadyQueue q2;
 	
     for (int i = 0; i < 1000000; i++) {

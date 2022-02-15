@@ -22,7 +22,7 @@ ReadyQueueHeap::~ReadyQueueHeap()
 // Arguments: 
 void ReadyQueueHeap::addPCB(PCB* p)
 {
-	// cout << "Adding: " << *p << endl;
+	// cout << "Adding: " << p << endl;
 	if (count >= MAX)
 	{
 		// cout << "...cannot add.. full." << endl;
@@ -51,7 +51,7 @@ PCB* ReadyQueueHeap::removePCB()
 	PCB* ret = Q[0];
 	ret->state = ProcState::RUNNING;
 	reheapify();
-	// cout << "Removed: " << *ret << endl;
+	// cout << "Removed: " << ret << endl;
 	return ret;
 }
 
@@ -63,7 +63,7 @@ void ReadyQueueHeap::display()
 	//  No need to show a tree format.
 	int i = 0;
 	while (i < count)
-		cout << *Q[i++] << "\n\t";
+		cout << Q[i++] << "\n\t";
 	cout << endl;
 }
 
