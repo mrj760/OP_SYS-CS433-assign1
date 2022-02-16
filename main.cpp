@@ -72,6 +72,11 @@ int main(int argc, char* argv[]) {
 
 	// TODO: Add your code for Test 2
 	std::cout << "\n\nPerforming Test 2" << std::endl;
+
+	
+	srand(static_cast<unsigned int>(time(nullptr)));
+	rand();
+
 	//start timer 
 	#ifdef _WIN32
 	chrono::time_point<clock_type> start{clock_type::now()};
@@ -81,17 +86,16 @@ int main(int argc, char* argv[]) {
 	clock_gettime(CLOCK_MONOTONIC, &start);
     #endif
 	
-	srand(static_cast<unsigned int>(time(nullptr)));
-	rand();
 	ReadyQueue q2;
-	
-    for (int i = 0; i < 1000000; i++) {
+	int id = 1;
+    for (int i = 0; i < 1000000; ++i) {
        	//TODO: add or remove a process with equal probabilty
 		if (rand() % 2)
 		{
-			int p = (rand() % ReadyQueue::MAX)+1;
+			int p = (rand() % ReadyQueue::MAXP)+1;
 			// cout << p << endl;
-			q2.addPCB(new PCB(i, p));
+			q2.addPCB(new PCB(id++, p));
+			if (id > 100) id = 1;
 		}
 		else
 		{

@@ -28,10 +28,13 @@ public:
 
 	void display();	 // display all jobs
 
+	int unique(const int&);
+
 	// Returns the number of elements in the queue.
 	int size();
 	
-	const static int MAX = 49; // jobs hashed by priority, which can only be up to 50
+	const static int MAXP = 49; // jobs hashed by priority, which can only be up to 50
+	const static int MAXID = 100; // jobs hashed by priority, which can only be up to 50
 
 private:
 	struct Node // contains a job and a pointer to the next job of the same priority
@@ -40,19 +43,19 @@ private:
 		Node* next;
 
 		Node(PCB*);
+		// friend ReadyQueue;
 	};
-	class List // contains jobs of the same priority
+	struct List // contains jobs of the same priority
 	{
-		private:
 		Node* first = nullptr;
 		Node* last = nullptr;
 		unsigned int listcount = 0;
 
 		void addRear(PCB*);
 		PCB* removeFront();
-
-		friend ReadyQueue;
 	};
 	int count = 0;
-	List Q[MAX]; // array holding lists of jobs
+	int highestPriority = MAXP;
+	List Q[MAXP]; // array holding lists of jobs
+	bool pids[MAXID]{false};
 };
