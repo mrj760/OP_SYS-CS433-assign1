@@ -21,6 +21,7 @@ public:
 	ReadyQueue();
 	~ReadyQueue();
 
+	// adds a PCB to the ReadyQueue
 	void addPCB(PCB*);
 
 	// remove and return the PCB with the highest priority from the queue
@@ -28,7 +29,7 @@ public:
 
 	void display();	 // display all jobs
 
-	int unique(const int&);
+	int unique(const int&); // returns either the original PID if it is unique or a new one if not
 
 	// Returns the number of elements in the queue.
 	int size();
@@ -54,8 +55,8 @@ private:
 		void addRear(PCB*);
 		PCB* removeFront();
 	};
-	int count = 0;
-	int highestPriority = MAXP;
+	int count = 0; // how many jobs are in the ready queue
+	int highestPriority = MAXP; // value of the current highest priority (to reduce iteration)
 	List Q[MAXP]; // array holding lists of jobs
-	bool pids[MAXID]{false};
+	bool pids[MAXID]{false}; // array of booleans representing whether PIDs are already stored
 };
