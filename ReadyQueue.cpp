@@ -43,7 +43,7 @@ PCB* ReadyQueue::List::removeFront()
 
 ReadyQueue::ReadyQueue()
 {
-
+    // nothing necessary here
 }
 
 // iterate through all nodes in non-empty lists and delete
@@ -64,6 +64,7 @@ ReadyQueue::~ReadyQueue()
     }
 }
 
+// returns either the original PID if it is unique or a new one if not
 int ReadyQueue::unique(const int& pid)
 {
     if (!pids[pid-1])
