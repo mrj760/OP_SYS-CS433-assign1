@@ -86,14 +86,17 @@ int main(int argc, char* argv[]) {
 	
 	ReadyQueue q2;
 	int id = 1;
-    for (int i = 0; i < 1000000; ++i) {
+	for (int i = 1; i <= 100; ++i)
+	{
+		q2.addPCB(new PCB(i, (rand() % ReadyQueue::MAXP) + 1));
+	}
+    for (int i = 101; i < 1000101; ++i) {
        	//TODO: add or remove a process with equal probabilty
 		if (rand() % 2)
 		{
 			int p = (rand() % ReadyQueue::MAXP)+1;
 			// cout << p << endl;
-			q2.addPCB(new PCB(id++, p));
-			if (id > 100) id = 1;
+			q2.addPCB(new PCB(i, p));
 		}
 		else
 		{

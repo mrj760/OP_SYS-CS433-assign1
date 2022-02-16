@@ -29,13 +29,13 @@ public:
 
 	void display();	 // display all jobs
 
-	int unique(const int&); // returns either the original PID if it is unique or a new one if not
+	// int unique(const int&); // returns either the original PID if it is unique or a new one if not
 
 	// Returns the number of elements in the queue.
 	int size();
 	
 	const static int MAXP = 49; // jobs hashed by priority, which can only be up to 50
-	const static int MAXID = 100; // jobs hashed by priority, which can only be up to 50
+	// const static int MAXID = 100; // jobs hashed by priority, which can only be up to 50
 
 private:
 	struct Node // contains a job and a pointer to the next job of the same priority
@@ -58,5 +58,5 @@ private:
 	int count = 0; // how many jobs are in the ready queue
 	int highestPriority = MAXP; // value of the current highest priority (to reduce iteration)
 	List Q[MAXP]; // array holding lists of jobs
-	bool pids[MAXID]{false}; // array of booleans representing whether PIDs are already stored
+	// bool pids[MAXID]{false}; // array of booleans representing whether PIDs are already stored
 };

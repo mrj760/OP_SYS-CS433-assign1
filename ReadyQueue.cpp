@@ -65,37 +65,37 @@ ReadyQueue::~ReadyQueue()
 }
 
 // returns either the original PID if it is unique or a new one if not
-int ReadyQueue::unique(const int& pid)
-{
-    if (!pids[pid-1])
-        return pid;
-    for (int i = 0; i < MAXID; ++i)
-    {
-        if (!pids[i])
-        {
-            return i+1;
-        }
-    }
-    return -1;
-}
+// int ReadyQueue::unique(const int& pid)
+// {
+//     if (!pids[pid-1])
+//         return pid;
+//     for (int i = 0; i < MAXID; ++i)
+//     {
+//         if (!pids[i])
+//         {
+//             return i+1;
+//         }
+//     }
+//     return -1;
+// }
 
 // add a process to the queue by finding the right priority list to add it to
 void ReadyQueue::addPCB(PCB* proc)
 {
     // cout << "Adding: {" << proc << "}" << endl;
     int p = proc->priority-1;
-    int unq = unique(proc->id);
-    if (unq == -1)
-    {   
-        return; // no unique IDs available, do not add
-    }
-    else
-        proc->id = unq;
+    // int unq = unique(proc->id);
+    // if (unq == -1)
+    // {   
+    //     return; // no unique IDs available, do not add
+    // }
+    // else
+    //     proc->id = unq;
     if (p < highestPriority)
         highestPriority = p;
     proc->state = ProcState::READY;
     Q[p].addRear(proc);
-    pids[unq-1] = 1;
+    // pids[unq-1] = 1;
     ++count;
 }
 
@@ -114,7 +114,7 @@ PCB* ReadyQueue::removePCB()
         // cout << "Removed: {" << ret << "}" << endl;
         --count;
         highestPriority = (Q[i].listcount > 0) ? highestPriority : highestPriority+1;
-        pids[ret->id-1] = 0;
+        // pids[ret->id-1] = 0;
         return ret;
     }
     return nullptr; // doesn't do anything, just here for compiler sanity
