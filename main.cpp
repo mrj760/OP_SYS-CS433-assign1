@@ -55,12 +55,10 @@ int main(int argc, char* argv[]) {
 	q1.display();
 	//TODO: add additional processes 29, 41, 18 and 46 to q1 and display q1.
 	cout << "Adding: 29, 41, 18, 46." << endl;
-	q1.addPCB(new PCB(14));
 	q1.addPCB(new PCB(29));
 	q1.addPCB(new PCB(41));
 	q1.addPCB(new PCB(18));
 	q1.addPCB(new PCB(46));
-	q1.addPCB(new PCB(48));
 	q1.display();
 	//TODO: One by one remove the process with the highest priority from the queue q1 and display the queue after each removal.
 	while (q1.size() > 0)
@@ -116,7 +114,7 @@ int main(int argc, char* argv[]) {
 	cout << "Test 2 run time = " << elapsed << "seconds" << endl;
 	#endif
 
-	// q2.display();
+	q2.display();
 
 	return 0;
 }
